@@ -1,0 +1,73 @@
+1. Run the commands sort, wc and uniq on the commands.js file. Explain how they work and what the output was.
+
+```sort``` will sort each line of the file into a certain order, default ascending alphabetically/numerically, but we can specify options to sort according to certain parameters (-b will ignore leading blanks in the line, -g according to numerical value, etc). When we run sort on commands.js, the result gives us all the original lines of the file, but now sorted in order:
+```
+break;
+break;
+commandLibrary.cat(userInputArray.slice(1));
+commandLibrary.echo(userInputArray.slice(1).join(" "));
+done(data);
+if (err) throw err;
+//we will add the functionality of echo next within the object commandLibrary
+});
+case "cat":
+case "echo":
+const fileName = fullPath[0];
+done(userInput);
+fs.readFile(fileName, (err, data) => {
+process.stdout.write('\nprompt > ');
+process.stdout.write(output);
+"cat": function(fullPath){
+"echo": function(userInput){
+}
+}
+},
+const command = userInputArray[0];
+const userInputArray = userInput.split(" ");
+switch(command) {
+//parses the user input to understand which command was typed
+
+
+
+
+
+//where we will store our commands
+//where we will store the logic of our commands
+//write out data
+}
+}
+};
+const commandLibrary = {
+const fs = require("fs");
+function done(output) {
+function evaluateCmd(userInput) {
+module.exports.commandLibrary = commandLibrary;
+module.exports.evaluateCmd = evaluateCmd;
+```
+
+
+```wc``` will return the count of newlines in the file, the number of words in the file (hence, wc), then the number of characters used in the file, in that order. So, when we run wc on commands.js, we get:
+```
+41  110 1071 commands.js
+```
+where 41 is the line count, 110 is the word count, and 1071 the number of characters in the file.
+
+
+```uniq``` will remove duplicate lines that are adjacent from a file - if we have two lines reading ```
+text1
+text1
+```
+only the first text1 line will be returned - however, if there is another, different line in between the two (text2), we will still see all lines, as now the replicants are no longer adjacent to one another. When we run uniq on commands.js, we do not see any change from the original file, because there are no duplicate, adjacent lines in the file.
+
+2. Using the pipe (|) connect at least two commands and run it on commands.js. Explain what the output was and why the specific data was outputted.
+First, we'll try something useful, sort into uniq, where we expect the file to first be sorted, then the duplicate, adjacent lines will be removed and that result shown:
+```sort commands.js | uniq```
+However, in the case of commands.js, uniq is not too useful, as when sorted, the only similar lines are the blank/return lines, the two ```breaks;``` from the switch/cases, and some closing function brackets ```}```, where those duplicates are removed. We can confirm this by piping the two results into wc:
+```sort commands.js | wc``` giving us:
+```41     110    1071```
+and
+```sort commands.js | uniq | wc``` giving us:
+```34     107    1041```
+When we pipe into the wc, we then see the number of lines (41 vs 34), which differ since uniq removed some duplicate lines, and the differing wordcount and character counter, since we removed the breaks and some closing brackets.
+
+6.
