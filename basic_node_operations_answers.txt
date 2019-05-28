@@ -71,3 +71,18 @@ and
 When we pipe into the wc, we then see the number of lines (41 vs 34), which differ since uniq removed some duplicate lines, and the differing wordcount and character counter, since we removed the breaks and some closing brackets.
 
 6.
+Reverse String
+Given a string, reverse the order of characters in each word within a sentence while maintaining the original word order and whitespace and return the string. To improve your problem-solving experience, use the suggested functions to solve the problem.
+```js
+"reverseString": function(userInput){
+  let wordsArray = userInput.split(' ');
+  let tempArray = [];
+
+  wordsArray.forEach( (word) => {
+    let reversedWord = word.split('').reverse().join('');
+    tempArray.push(reversedWord);
+  });
+  let reversedInput = tempArray.join(' ');
+  done(reversedInput);
+}
+```
